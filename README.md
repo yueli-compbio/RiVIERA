@@ -28,7 +28,7 @@ Mac installation:
 
 Linux installation:
 
-`$ R CMD INSTALL RiVIERA_0.9.3_Linux.tar.gz`
+`$ R CMD INSTALL RiVIERA_0.9.3_Linux.tgz`
 
 ## Documentation
 Function manuals are described in R documents:
