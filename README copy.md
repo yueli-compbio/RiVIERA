@@ -35,5 +35,5 @@ Function manuals are described in R documents:
 
 User manual with examples is written in sweave and invoked by vignette:
 
-`> vignette(RiVIERA)`
+`> vignette("RiVIERA")`
 

@@ -14,8 +14,7 @@ To run RiVIERA-ench, we will need the following data. Suppose $M$ SNPs, $K$ anno
 3. Annotatoin by group binary matrix indicating what group each annotatoin belongs to. This is required only for the group-guided sparse enrichment model ($M\times G$)
 
 
-
-```r
+```{r eval=TRUE,echo=TRUE}
 library(RiVIERA)
 ```
 

@@ -10,7 +10,7 @@ License: GPL (>= 2)
 Depends: R (>= 3.0.2), RcppArmadillo, methods, reshape
 Imports: Rcpp (>= 0.11.5), RcppArmadillo
 LinkingTo: Rcpp, RcppArmadillo
-Suggests: gridExtra, ggplot2, scales, ggbio, LDheatmap
+Suggests: gridExtra, ggplot2, scales, ggbio, LDheatmap, knitr, rmarkdown
 URL: https://github.mit.edu/liyue/riviera
 Lazyload: yes
 VignetteBuilder: knitr
