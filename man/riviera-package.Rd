@@ -3,25 +3,21 @@
 \alias{RiVIERA}
 \docType{package}
 \title{
-  Risk Variant Inference using Epigenomic Reference Annotation to predict Multiple Trait-causing co-localized mutations
+  Risk Variant Inference using Epigenomic Reference Annotation
 }
 \description{
-  RiVIERA-MT is a full Bayesian framework to fine-map causal variants using GWAS summary statistics in z-scores in one or multiple related traits and large-scale reference annotations in binary or continuous values.
+  RiVIERA is a probabilistic framework to infer functional enrichments and prioritize causal variants using summary statistics and epigenomic or other functional genomic annotations. Specifically, RiVIERA can be divided into two stages: (1) RiVIERA-ench: genome-wide enrichment estimations; (2) RiVIERA-fmap: fine-mapping causal variants. We demonstrate how to run both in the following tutorial.
 }
 \details{
-  The goal of RiVIERA is to infer for each SNP in disease their posterior probability of disease association and to detect functional enrichments or depletions from the annotations, taking into account the underlying multi-trait epigenomic covariance. The inputs to the model are:
-  
-  1. GWAS summary association statistics in one or more traits (Z-scores):
-  
-  List of matrices, and each matrix is M_d x 1 vector for M_d SNPs in disease d;
-  
-  2. Linkage disequilibrium (LD) either from the GWAS cohort or reference panel from 1000 Genome consortium:
-  
-  Nested list of lists. The list contains D items for D traits. Each item is also a list and contain a set of LD matrices for loci of trait d;
-  
-  3. Functional annotation matrix (binary or continuous) for each SNP:
-  
-  Same as 1 but contain M_d x K matrix for trait d where K is the number of annotations.
+  To run RiVIERA, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
+
+1. GWAS summary statistics in terms p-values in a numerical vector (M x 1)
+
+2. Functional annotation matrix (binary or continuous) for each SNP (M x K)
+
+3. Annotatoin by group binary matrix indicating what group each annotatoin belongs to. This is required only for the group-guided sparse enrichment model (M x G)
+
+4. Linkage disequilibrium (LD) either from the GWAS cohort or reference panel (e.g. 1000 Genome Project). LD matrices are presented in a list with each item representing a square matrix of Pearson correlation between SNPs in that locus. This is required only for the fine-mapping model. 
 }
 \author{
 Yue Li
@@ -29,7 +25,7 @@ Yue Li
 Maintainer: Yue Li <liyue@mit.edu>
 }
 \references{
-  Yue Li and Manolis Kellis. RiVIERA-MT: A Bayesian model to infer risk variants in related traits using summary statistics and functional genomic annotations. bioRxiv 059345; doi: http://dx.doi.org/10.1101/059345
+  Li, Yue and Davila-Velderrain, Jose and Kellis, Manolis (2017) A probabilistic framework to dissect functional cell-type-specific regulatory elements and risk loci underlying the genetics of complex traits. bioRxiv 10.1101/059345.
 }
 % Optionally other standard keywords, one per line,
 % from the file KEYWORDS in the R documentation.
