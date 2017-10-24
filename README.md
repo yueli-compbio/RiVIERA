@@ -18,17 +18,13 @@ RiVIERA-MT is a full Bayesian framework to fine-map causal variants using GWAS s
 ## Installation
 RiVIERA requires Rcpp and RcppArmadillo, which can be easily installed within R via 'install.packages' function.
 
-Download and install:
+Download, build and install:
 
-`$ git clone https://github.com/yueli-compbio/RiVIERA-MT`
+`$ git clone https://github.mit.edu/liyue/riviera`
 
-Mac installation:
+`$ R CMD build riviera`
 
-`$ R CMD INSTALL RiVIERA_0.9.3_MacOS.tgz`
-
-Linux installation:
-
-`$ R CMD INSTALL RiVIERA_0.9.3_Linux.tgz`
+`$ R CMD INSTALL RiVIERA_0.9.3.tar.gz`
 
 ## Documentation
 Function manuals are described in R documents:

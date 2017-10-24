@@ -1,0 +1,16 @@
+Package: RiVIERA
+Type: Package
+Title: RiVIERA: Risk Variants Inference using Epigenomic Reference Annotations
+Version: 0.9.3
+Date: 2016-04-28
+Author: Yue Li
+Maintainer: Yue Li <liyue@mit.edu>
+Description: This package provides functions for joint Bayesian inference of risk variants across multiple related traits taking into account the functional genomic data.
+License: GPL (>= 2)
+Depends: R (>= 3.0.2), RcppArmadillo, methods, reshape
+Imports: Rcpp (>= 0.11.5), RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo
+Suggests: gridExtra, ggplot2, scales, ggbio, LDheatmap
+URL: https://github.mit.edu/liyue/riviera
+Lazyload: yes
+VignetteBuilder: knitr

@@ -1,0 +1,11 @@
+citEntry(entry="article",
+         title = "A Bayesian model to infer risk variants in related traits using summary statistics and functional genomic annotations",
+         author = personList(
+        as.person("Yue Li"),
+        as.person("Manolis Kellis")),
+        year = 2016,
+        journal = "bioRxiv",
+        volume = "TBA",
+        pages = "TBA",
+        textVersion = paste("Yue Li (2016):",
+        "RiVIERA", "TBA"))
