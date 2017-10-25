@@ -1,11 +1,12 @@
 citEntry(entry="article",
-         title = "A Bayesian model to infer risk variants in related traits using summary statistics and functional genomic annotations",
+         title = "A probabilistic framework to dissect functional cell-type-specific regulatory elements and risk loci underlying the genetics of complex traits",
          author = personList(
         as.person("Yue Li"),
+        as.person("Jose Davila-Velderrain"),
         as.person("Manolis Kellis")),
-        year = 2016,
+        year = 2017,
         journal = "bioRxiv",
         volume = "TBA",
         pages = "TBA",
-        textVersion = paste("Yue Li (2016):",
+        textVersion = paste("Yue Li (2017):",
         "RiVIERA", "TBA"))
