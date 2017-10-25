@@ -1,3 +1,14 @@
+---
+title: "Risk Variants Inference using Epigenomic Reference Annotations (RiVIERA)"
+author: "Yue Li"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Risk Variants Inference using Epigenomic Reference Annotations (RiVIERA)}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
 # Risk Variants Inference using Epigenomic Reference Annotations (RiVIERA)
 
 ## Brief introduction
