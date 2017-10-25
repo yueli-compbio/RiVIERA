@@ -307,10 +307,7 @@ From the above enrichments, we can see that due to the sparsity we impose over t
 ## Citation
 If you use RiVIERA for your research, please cite the following papers:
 
-Li, Y., Davilla-Velderrain, J., and Kellis, M. (2017). A probabilistic framework to dissect functional cell-type-specific regulatory elements and risk loci underlying the genetics of complex traits. bioRxiv 2017
-
-
-
+Li, Y., Davila-Velderrain, J., & Kellis, M. (2017). A probabilistic framework to dissect functional cell-type-specific regulatory elements and risk loci underlying the genetics of complex traits. bioRxiv. http://doi.org/10.1101/059345
 
 
 
