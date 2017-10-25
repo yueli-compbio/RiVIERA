@@ -14,10 +14,7 @@ vignette: >
 ## Brief introduction
 RiVIERA is a probabilistic framework to infer functional enrichments and prioritize causal variants using summary statistics and epigenomic or other functional genomic annotations. Specifically, RiVIERA can be divided into two stages: (1) RiVIERA-ench: genome-wide enrichment estimations; (2) RiVIERA-fmap: fine-mapping causal variants. We demonstrate how to run both in the following tutorial.
 
-## Genome-wide enrichment estimations
-
-
-### Data preparation
+## Data preparation
 To run RiVIERA, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
 
 1. GWAS summary statistics in terms p-values in a numerical vector (M x 1)
@@ -27,7 +24,7 @@ To run RiVIERA, we will need the following data. Suppose M SNPs, K annotations, 
 
 For illustration purpose, we provide a simulated dataset saved in RData file and loaded as follows. In this simulated dataset, there are 100 causal variants out of 17225 variants and 10 annotations. The causal annotatoins are the first 3 annotatoins.
 
-### Genome-wide enrichment estiamtions
+## Genome-wide enrichment estiamtions
 We first demonstrate inferring genome-wide enrichment using an efficient regularized log-likelihood model.
 
 ```{r eval=TRUE,echo=TRUE}
@@ -90,7 +87,7 @@ ggplot(enrichment, aes(x=ann, y=-log10(ann_w_pval), fill=causal)) +
   ylab("Model estimates")
 ```
 
-### Fine-mapping causal variants
+## Fine-mapping causal variants
 We now demonstrate the fine-mapping component of RiVIERA framework using the same simulated data. Here we incorporate the LD information along with summary statistics z-scores and annotations. Notably, we can also use the above enrichments as the prior information by setting the "ann_w_mu" option. We filter out the loci that don't harbor any causal SNPs and retain 9939 variants and 55 risk loci each harboring at least one causal SNP.
 
 ```{r eval=TRUE,echo=TRUE}
@@ -204,9 +201,7 @@ library(gridExtra)
 grid.arrange(evalLinePlot(powanal_roc, "ROC"), evalLinePlot(powanal_prc, "PRC"))
 ```
 
-
-
-### Group-guided sparse enrichment learning
+## Group-guided sparse enrichment learning
 The RiVIERA-ridge assumes that the annotations are independent from each other and uses L2-norm (i.e., zeor-mean standard normal prior) to regularize enrichments. However, often the annotations are correlated with each other due to the shared basic regulatory elements. As a result, a naive model will give much interpretable enrichment estimates. Here we address this challenge by harnessing the metadata information about the annotations. 
 
 For instance, the group information can be the group of primariy tissue or cell types. Within each tissue type, there are further refinement on the cell-type-specific annotations. For instance, we can have immune as a general cell group, and under "immune" category, we have different immune cell-types such as T cell, B cells, etc. The basic idea is therefore to iteratively infer the enrichment at the cell-group level and then dissect the cell-type-specific enrichment within the group that exhibit high enrichment.
@@ -219,7 +214,6 @@ Here we impose a sparsity (groupScoreThres) of 0.9, which at each iteration will
 
 ```{r eval=TRUE,echo=TRUE}
 
-
 gwasData <- system.file("extdata/Multiple_sclerosis.RData", package="RiVIERA")
 
 if(!file.exists(gwasData)) {
@@ -230,7 +224,7 @@ load(gwasData)
 
 library(openxlsx)
 
-metadata <- system.file("extdata/Multiple_sclerosis.RData", package="RiVIERA")
+metadata <- system.file("extdata/epiref.xlsx", package="RiVIERA")
 
 if(!file.exists(metadata)) {
   metadata <- "~/Projects/riviera/database/LDSCORE/all/epiref.xlsx"  
