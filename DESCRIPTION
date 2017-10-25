@@ -11,6 +11,6 @@ Depends: R (>= 3.0.2), RcppArmadillo, methods, reshape
 Imports: Rcpp (>= 0.11.5), RcppArmadillo
 LinkingTo: Rcpp, RcppArmadillo
 Suggests: gridExtra, ggplot2, scales, ggbio, LDheatmap, knitr, rmarkdown
-URL: https://github.mit.edu/liyue/riviera
+URL: https://github.com/yueli-compbio/RiVIERA
 Lazyload: yes
 VignetteBuilder: knitr

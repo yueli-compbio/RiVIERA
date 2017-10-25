@@ -7,12 +7,12 @@ RiVIERA is a probabilistic framework to infer functional enrichments and priorit
 
 
 ### Data preparation
-To run RiVIERA, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
+To run RiVIERA-ench, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
 
 1. GWAS summary statistics in terms p-values in a numerical vector (M x 1)
 2. Functional annotation matrix (binary or continuous) for each SNP (M x K)
 3. Annotatoin by group binary matrix indicating what group each annotatoin belongs to. This is required only for the group-guided sparse enrichment model (M x G)
-4. Linkage disequilibrium (LD) either from the GWAS cohort or reference panel (e.g. 1000 Genome Project). LD matrices are presented in a list with each item representing a square matrix of Pearson correlation between SNPs in that locus. This is required only for the fine-mapping model. 
+4. Linkage disequilibrium (LD) either from the GWAS cohort or reference panel (e.g. 1000 Genome Project)
 
 For illustration purpose, we provide a simulated dataset saved in RData file and loaded as follows. In this simulated dataset, there are 100 causal variants out of 17225 variants and 10 annotations. The causal annotatoins are the first 3 annotatoins.
 
