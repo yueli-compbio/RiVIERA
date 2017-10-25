@@ -9,7 +9,6 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-# Risk Variants Inference using Epigenomic Reference Annotations (RiVIERA)
 
 ## Brief introduction
 RiVIERA is a probabilistic framework to infer functional enrichments and prioritize causal variants using summary statistics and epigenomic or other functional genomic annotations. Specifically, RiVIERA can be divided into two stages: (1) RiVIERA-ench: genome-wide enrichment estimations; (2) RiVIERA-fmap: fine-mapping causal variants. We demonstrate how to run both in the following tutorial.
