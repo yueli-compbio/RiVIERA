@@ -9,9 +9,17 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-
 ## Brief introduction
 RiVIERA is a probabilistic framework to infer functional enrichments and prioritize causal variants using summary statistics and epigenomic or other functional genomic annotations. Specifically, RiVIERA can be divided into two stages: (1) RiVIERA-ench: genome-wide enrichment estimations; (2) RiVIERA-fmap: fine-mapping causal variants. We demonstrate how to run both in the following tutorial.
+
+## Installation
+You can easily install RiVIERA from Github as follows:
+
+```{r eval=FALSE,echo=FALSE}
+library(devtools)
+
+install_github("yueli-compbio/RiVIERA")
+```
 
 ## Data preparation
 To run RiVIERA, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
@@ -85,6 +93,20 @@ ggplot(enrichment, aes(x=ann, y=-log10(ann_w_pval), fill=causal)) +
   xlab("Annotation") + geom_hline(yintercept = 2) +
   ylab("Model estimates")
 ```
+
+
+We can infer posterior probability of associations (PPA) for each SNP being in the risk loci as follows:
+
+```{r eval=TRUE,echo=TRUE}
+ppa <- inferPPA(gwas_pval, ann, ann_w, alpha=res$alpha)
+
+rownames(ppa) <- rownames(gwas_pval)
+
+print(head(ppa[order(ppa,decreasing = TRUE),]))
+```
+
+The above PPA gives a way infer risk loci. To identify the exact causal variants we will need to account for LD, which we demonstrate next.
+
 
 ## Fine-mapping causal variants
 We now demonstrate the fine-mapping component of RiVIERA framework using the same simulated data. Here we incorporate the LD information along with summary statistics z-scores and annotations. Notably, we can also use the above enrichments as the prior information by setting the "ann_w_mu" option. We filter out the loci that don't harbor any causal SNPs and retain 9939 variants and 55 risk loci each harboring at least one causal SNP.
