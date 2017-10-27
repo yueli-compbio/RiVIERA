@@ -1,22 +1,37 @@
-# Risk Variants Inference using Epigenomic Reference Annotations (RiVIERA)
+---
+title: "Risk Variants Inference using Epigenomic Reference Annotations (RiVIERA)"
+author: "Yue Li"
+date: '`r Sys.Date()`'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Risk Variants Inference using Epigenomic Reference Annotations (RiVIERA)}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
 
 ## Brief introduction
 RiVIERA is a probabilistic framework to infer functional enrichments and prioritize causal variants using summary statistics and epigenomic or other functional genomic annotations. Specifically, RiVIERA can be divided into two stages: (1) RiVIERA-ench: genome-wide enrichment estimations; (2) RiVIERA-fmap: fine-mapping causal variants. We demonstrate how to run both in the following tutorial.
 
-## Genome-wide enrichment estimations
+## Installation
+You can easily install RiVIERA from Github as follows:
 
+```{r eval=FALSE,echo=FALSE}
+library(devtools)
 
-### Data preparation
-To run RiVIERA-ench, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
+install_github("yueli-compbio/RiVIERA")
+```
+
+## Data preparation
+To run RiVIERA, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
 
 1. GWAS summary statistics in terms p-values in a numerical vector (M x 1)
 2. Functional annotation matrix (binary or continuous) for each SNP (M x K)
-3. Annotatoin by group binary matrix indicating what group each annotatoin belongs to. This is required only for the group-guided sparse enrichment model (M x G)
-4. Linkage disequilibrium (LD) either from the GWAS cohort or reference panel (e.g. 1000 Genome Project)
+3. Annotatoin by group binary matrix indicating what group each annotatoin belongs to. This is required only for the group-guided sparse enrichment model (M x K)
+4. Linkage disequilibrium (LD) either from the GWAS cohort or reference panel (e.g. 1000 Genome Project). LD matrices are presented in a list with each item representing a square matrix of Pearson correlation between SNPs in that locus. This is required only for the fine-mapping model. 
 
 For illustration purpose, we provide a simulated dataset saved in RData file and loaded as follows. In this simulated dataset, there are 100 causal variants out of 17225 variants and 10 annotations. The causal annotatoins are the first 3 annotatoins.
 
-### Genome-wide enrichment estiamtions
+## Genome-wide enrichment estiamtions
 We first demonstrate inferring genome-wide enrichment using an efficient regularized log-likelihood model.
 
 ```{r eval=TRUE,echo=TRUE}
@@ -79,7 +94,21 @@ ggplot(enrichment, aes(x=ann, y=-log10(ann_w_pval), fill=causal)) +
   ylab("Model estimates")
 ```
 
-### Fine-mapping causal variants
+
+We can infer posterior probability of associations (PPA) for each SNP being in the risk loci as follows:
+
+```{r eval=TRUE,echo=TRUE}
+ppa <- inferPPA(gwas_pval, ann, ann_w, alpha=res$alpha)
+
+rownames(ppa) <- rownames(gwas_pval)
+
+print(head(ppa[order(ppa,decreasing = TRUE),]))
+```
+
+The above PPA gives a way infer risk loci. To identify the exact causal variants we will need to account for LD, which we demonstrate next.
+
+
+## Fine-mapping causal variants
 We now demonstrate the fine-mapping component of RiVIERA framework using the same simulated data. Here we incorporate the LD information along with summary statistics z-scores and annotations. Notably, we can also use the above enrichments as the prior information by setting the "ann_w_mu" option. We filter out the loci that don't harbor any causal SNPs and retain 9939 variants and 55 risk loci each harboring at least one causal SNP.
 
 ```{r eval=TRUE,echo=TRUE}
@@ -193,9 +222,7 @@ library(gridExtra)
 grid.arrange(evalLinePlot(powanal_roc, "ROC"), evalLinePlot(powanal_prc, "PRC"))
 ```
 
-
-
-### Group-guided sparse enrichment learning
+## Group-guided sparse enrichment learning
 The RiVIERA-ridge assumes that the annotations are independent from each other and uses L2-norm (i.e., zeor-mean standard normal prior) to regularize enrichments. However, often the annotations are correlated with each other due to the shared basic regulatory elements. As a result, a naive model will give much interpretable enrichment estimates. Here we address this challenge by harnessing the metadata information about the annotations. 
 
 For instance, the group information can be the group of primariy tissue or cell types. Within each tissue type, there are further refinement on the cell-type-specific annotations. For instance, we can have immune as a general cell group, and under "immune" category, we have different immune cell-types such as T cell, B cells, etc. The basic idea is therefore to iteratively infer the enrichment at the cell-group level and then dissect the cell-type-specific enrichment within the group that exhibit high enrichment.
@@ -208,7 +235,6 @@ Here we impose a sparsity (groupScoreThres) of 0.9, which at each iteration will
 
 ```{r eval=TRUE,echo=TRUE}
 
-
 gwasData <- system.file("extdata/Multiple_sclerosis.RData", package="RiVIERA")
 
 if(!file.exists(gwasData)) {
@@ -219,7 +245,7 @@ load(gwasData)
 
 library(openxlsx)
 
-metadata <- system.file("extdata/Multiple_sclerosis.RData", package="RiVIERA")
+metadata <- system.file("extdata/epiref.xlsx", package="RiVIERA")
 
 if(!file.exists(metadata)) {
   metadata <- "~/Projects/riviera/database/LDSCORE/all/epiref.xlsx"  
@@ -307,10 +333,7 @@ From the above enrichments, we can see that due to the sparsity we impose over t
 ## Citation
 If you use RiVIERA for your research, please cite the following papers:
 
-Li, Y., Davilla-Velderrain, J., and Kellis, M. (2017). A probabilistic framework to dissect functional cell-type-specific regulatory elements and risk loci underlying the genetics of complex traits. bioRxiv 2017
-
-
-
+Li, Y., Davila-Velderrain, J., & Kellis, M. (2017). A probabilistic framework to dissect functional cell-type-specific regulatory elements and risk loci underlying the genetics of complex traits. bioRxiv. http://doi.org/10.1101/059345
 
 
 
