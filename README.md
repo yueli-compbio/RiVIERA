@@ -11,7 +11,7 @@ install_github("yueli-compbio/RiVIERA")
 ```
 
 ## Data preparation
-To run RiVIERA, we will need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
+To run RiVIERA, we need the following data. Suppose M SNPs, K annotations, G groups over the K annotations, then the folowing data matrices are expected:
 
 1. GWAS summary statistics in terms p-values in a numerical vector (M x 1)
 2. Functional annotation matrix (binary or continuous) for each SNP (M x K)
